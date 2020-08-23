@@ -13,7 +13,10 @@ fn main() {
 
         let mut guess = String::new();
         io::stdin().read_line(&mut guess).expect("read_line fail!");
-        let guess: u32 = guess.trim().parse().expect("Please type a number!"); // 字符串转数字
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => continue,
+        }; // 字符串转数字
         println!("你输入的数字是 {}", guess);
         match guess.cmp(&secret_number) {
             Ordering::Less => println!("too small!"),
