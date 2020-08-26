@@ -3,26 +3,24 @@ use std::cmp::Ordering;
 use std::io;
 
 fn main() {
-    println!("欢迎来到 guess game!");
+    println!("欢迎来到猜数字游戏!");
 
-    let secret_number = thread_rng().gen_range(1, 101);
-    // println!("随机数字是 {}", secret_number);
+    let s = thread_rng().gen_range(1, 101);
 
     loop {
-        println!("请输入你数字:");
-
+        println!("请输入你的数字: ");
         let mut guess = String::new();
-        io::stdin().read_line(&mut guess).expect("read_line fail!");
+        io::stdin().read_line(&mut guess).expect("错误输入");
         let guess: u32 = match guess.trim().parse() {
-            Ok(num) => num,
+            Ok(i) => i,
             Err(_) => continue,
-        }; // 字符串转数字
-        println!("你输入的数字是 {}", guess);
-        match guess.cmp(&secret_number) {
-            Ordering::Less => println!("too small!"),
-            Ordering::Greater => println!("too big!"),
+        };
+
+        match guess.cmp(&s) {
+            Ordering::Less => println!("太小了！"),
+            Ordering::Greater => println!("太大了！"),
             Ordering::Equal => {
-                println!("you win!");
+                println!("恭喜你，猜对了！");
                 break;
             }
         }
