@@ -1,6 +1,6 @@
 mod a;
 
-use crate::a::b::c;
+pub use crate::a::b::c;
 
 mod foo {
     #[derive(Debug)]
